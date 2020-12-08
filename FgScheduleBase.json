@@ -1,0 +1,9 @@
+[
+ {"plantId":1053,"portNumber":12
+  "piSchedules":[
+    {"scheduleId":1156, "scheduleStartDate":"2020-11-19 11:45:00",
+      "scheduleStopDate":"2020-11-22 18:47:00","runEvery":3000,"runLength":3000},{"scheduleId:333"....}
+  ]
+ },
+ {"plantId":1234 ....}
+]
