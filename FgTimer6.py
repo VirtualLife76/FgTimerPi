@@ -1,8 +1,8 @@
 # Flash grow timer 6.0 # 
-import RPi.GPIO as GPIO
+#import RPi.GPIO as GPIO
 
 import json
-import requests  #For Ajax calls
+#import requests  #For Ajax calls
 import time
 from FgDateMethods import *
 
@@ -18,8 +18,8 @@ schedule_file = "FgSchedule.json"  #File name for main plant schedule
 HIGH = True
 LOW = False
 
-GPIO.setmode(GPIO.BCM) ## Use board pin numbering
-GPIO.setwarnings(False)
+#GPIO.setmode(GPIO.BCM) ## Use board pin numbering
+#GPIO.setwarnings(False)
 
 ##READ JSON     READ JSON     READ JSON     READ JSON     READ JSON     READ JSON     READ JSON     READ JSON     READ JSON     READ JSON     
 def read_json_file():
@@ -35,9 +35,9 @@ def read_json_file():
 class Shifter(object):
     def __init__(self):
         print('init shifter!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
-        GPIO.setup(data_pin, GPIO.OUT) 
-        GPIO.setup(latch_pin, GPIO.OUT) 
-        GPIO.setup(clock_pin, GPIO.OUT, initial=GPIO.LOW) ## Setup GPIO Pin to OUT
+        #GPIO.setup(data_pin, GPIO.OUT) 
+        #GPIO.setup(latch_pin, GPIO.OUT) 
+        #GPIO.setup(clock_pin, GPIO.OUT, initial=GPIO.LOW) ## Setup GPIO Pin to OUT
         #GPIO.setup(running, GPIO.OUT, initial=GPIO.LOW)  ## switch to turn on shift registers. Default high set in config.txt
         tmpAry = binary_array
 
@@ -52,19 +52,20 @@ class Shifter(object):
             print(binary_array)
             bits = {0: False, 1: True}
             
-            GPIO.output(latch_pin, LOW)
+            #GPIO.output(latch_pin, LOW)
             for p in reversed(binary_array):
-                GPIO.output(clock_pin, LOW)
-                GPIO.output(data_pin, bits[p])
-                GPIO.output(clock_pin, HIGH)
-            GPIO.output(latch_pin, HIGH)
+                #GPIO.output(clock_pin, LOW)
+                #GPIO.output(data_pin, bits[p])
+                #GPIO.output(clock_pin, HIGH)
+                print("blah")
+            #GPIO.output(latch_pin, HIGH)
 
             self.binary_array_last = binary_array.copy()
 
 ##Bootstrap         Bootstrap          Bootstrap        Bootstrap       Bootstrap       Bootstrap       Bootstrap       Bootstrap       Bootstrap
 shift = Shifter()
 def boostrap():    
-    GPIO.setup(running, GPIO.OUT, initial=GPIO.HIGH)  #Turn off all pumps by setting all OE 
+    #GPIO.setup(running, GPIO.OUT, initial=GPIO.HIGH)  #Turn off all pumps by setting all OE 
 
     shift.shift_output()  #Set each shift register to low (binary_array set to all 0's on create)
         
@@ -174,7 +175,7 @@ def update_schedule(schedule):
         
         for piSchedules in ports["piSchedules"][:]:    #a loop over a copy of the list referred as [:] 
             #print(str(schedules["nextOnTime"]) + ' -- ' + str(datetime.now()) + '---' + str(schedules["nextOffTime"]) + '---' + str(currentPort )) 
-            #print(' -- ' + str(dateABeforeB(schedules["nextOffTime"],  datetime.now())) + ' --- ' + str(dateABeforeB(schedules["nextOnTime"], datetime.now())))
+            #print(' -- ' + str(dateABeforeB(piSchedules["nextOffTime"],  datetime.now())) + ' --- ' + str(dateABeforeB(piSchedules["nextOnTime"], datetime.now())))
             scheduleCount += 1
 
             ##turn off

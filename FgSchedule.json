@@ -1,32 +1,36 @@
 [{"plantId":1051,"portNumber":8,"plantType":1,"substrate":2,"plantedDate":"2020-10-22 16:00:00","notes":"PAST","plantStatus":1,
-  "piSchedules":[{"scheduleId":1152,"plantId":0,
-                  "scheduleOrder":0,"scheduleStartDate":"2020-01-08 15:21:00",
-                  "scheduleStopDate":"2020-01-08 15:21:10","runEvery":3000,"runLength":1000},
-                {"scheduleId":1153,"plantId":0,"scheduleOrder":1,
-                 "scheduleStartDate":"2020-01-08 15:21:20","scheduleStopDate":"2020-01-08 15:27:50",
-                 "runEvery":60000,"runLength":1400}]
-  
- },
- {"plantId":1052,"portNumber":9,"plantType":1,"substrate":2,"plantedDate":"2020-10-22 16:00:00","notes":"Future","plantStatus":1,
-  "piSchedules":[{"scheduleId":1154,"plantId":0,
-                  "scheduleOrder":0,"scheduleStartDate":"2022-01-08 15:21:00",
-                  "scheduleStopDate":"2022-11-08 15:21:10","runEvery":3000,"runLength":1000},
-                {"scheduleId":1155,"plantId":0,"scheduleOrder":1,
-                 "scheduleStartDate":"2022-11-08 15:21:20","scheduleStopDate":"2022-11-18 15:17:50",
-                 "runEvery":60000,"runLength":1400}]
-  
- },
- {"plantId":1053,"portNumber":12,"plantType":1,"substrate":2,"plantedDate":"2020-11-14 08:00:00","notes":"Present","plantStatus":1,
-  "piSchedules":[{"scheduleId":1156,"plantId":0,
-                  "scheduleOrder":0,"scheduleStartDate":"2020-11-19 11:45:00",
-                  "scheduleStopDate":"2020-11-19 11:47:10","runEvery":10000,"runLength":500},
-                {"scheduleId":1156,"plantId":0,
-                  "scheduleOrder":0,"scheduleStartDate":"2020-11-19 11:45:00",
-                  "scheduleStopDate":"2020-11-19 11:45:10","runEvery":3000,"runLength":1000},
+    "piSchedules": [
 
-                {"scheduleId":1156,"plantId":0,
-                    "scheduleOrder":0,"scheduleStartDate":"2020-11-19 11:45:20",
-                    "scheduleStopDate":"2020-11-19 11:45:30","runEvery":3000,"runLength":1000}
-                ]
+        {
+            "scheduleId": 1152,
+            "plantId": 0,
+            "scheduleOrder": 0,
+            "scheduleStartDate": "2020-01-08 15:21:00",
+            "scheduleStopDate": "2020-01-08 15:21:10",
+            "runEvery": 3000,
+            "runLength": 1000,
+            "Notes": "Already Ran"
+        },
+        {
+            "scheduleId": 1153,
+            "plantId": 0,
+            "scheduleOrder": 1,
+            "scheduleStartDate": "2024-01-08 15:21:20",
+            "scheduleStopDate": "2024-04-08 15:27:50",
+            "runEvery": 6000,
+            "runLength": 1400,
+            "Notes": "Future Run"
+        },
+        {
+            "scheduleId": 1154,
+            "plantId": 0,
+            "scheduleOrder": 1,
+            "scheduleStartDate": "2020-01-08 15:21:20",
+            "scheduleStopDate": "2033-04-08 15:27:50",
+            "runEvery": 6000,
+            "runLength": 1400,
+            "Notes": "Currently Running"
+        }
+    ]
   
  }]
