@@ -20,6 +20,11 @@ schedule_file = "FgSchedule.json"  #File name for main plant schedule
 HIGH = True
 LOW = False
 
+
+def get_pretty_print(json_object):
+    return json.dumps(json_object, sort_keys=True, indent=4, separators=(',', ': '))
+
+
 ##READ JSON     READ JSON     READ JSON     READ JSON     READ JSON     READ JSON     READ JSON     READ JSON     READ JSON     READ JSON     
 def read_json_file():
     try:
@@ -42,20 +47,87 @@ def boostrap():
     return(json_schedule)
 
 
-def update_start_date(scheduleStartDate, scheduleEndDate):
+## Schedule is running, will next on time be today or tomorrow, set accordingly
+def update_start_date(scheduleStartDate, scheduleEndDate, runEvery, runLength):
+
+    ##End date should never be past
+    if (dateABeforeB(scheduleEndDate, datetime.now())):
+        raise Exception("Date provided can't be in the past")
+
+    #Get seconds difference -> divide by on/off times to get current date almost time. Remainder time - on time to see if currently running
+
+
+    ##timeDiff = ms_diff(scheduleStartDate, datetime.now())      ##difference in MS and now
+
+    tempStartDate = datetime_to_current(scheduleStartDate)
+
+
+    TIME_ELAPSED = datetime.now() - toDateTime(scheduleStartDate)
+    seconds_elapsed = TIME_ELAPSED.total_seconds() 
+
+
+    runFrequency = runEvery + runLength
+
+    msToCurrentTime = seconds_elapsed/runFrequency
+
+    newStartDateTime = addTime(scheduleStartDate, msToCurrentTime, "seconds")
+
+    print(newStartDateTime)
+
+
+
+
+    ##what time does it end on todays date, if later, then currently running
+    ##endDate = bring_date_current(scheduleEndDate)
+    ##if(dateABeforeB(endDate, currentDate))  ##ended today will start later. Eneded today could be at 8am or midnight so may start again the same day
+        ##Get next start time
+
+    ##else    ##base next start time before end time
+
+
+
+
+
     currentDate = bring_date_current(scheduleStartDate)
-    endDate =bring_date_current(scheduleEndDate)
+    
+    
+
+
     #if start-currentDatye is past and end time today is past add day
     if(dateABeforeB(currentDate, datetime.now()) and dateABeforeB(endDate, datetime.now())): #add a day if this schedule is already past
         currentDate = addTime(currentDate, 1, 'days')
-    c = currentDate
+        c = currentDate
     return currentDate
+
+
+
+def calculate_next_on_time(piSchedules):
+    print('calculate_next_on_time \n' + str(piSchedules) + '\n')
+
+    ##set to current start date of today or tomorrow and time
+    scheduleStartDate = update_start_date(piSchedules["scheduleStartDate"], piSchedules["scheduleStopDate"], piSchedules["runEvery"], piSchedules["runLength"])
+
+    timeMultiplier = (piSchedules["runEvery"] + piSchedules["runLength"]) / 1000       #calculate largest multiplier to get to next time convert to Seconds from MS
+    
+    secsDiff = (datetime.now() - toDateTime(scheduleStartDate)).total_seconds()
+
+
+
+    diffCount = int(secsDiff/(timeMultiplier)) #Number of timeMultipliers to add, int to round down
+    nextOnTime = addTime(scheduleStartDate, diffCount * (timeMultiplier), 'seconds')
+    nextOnTime = addTime(nextOnTime, timeMultiplier, 'seconds') #add once more so past now
+
+    nextOffTime = addTime(nextOnTime, piSchedules["runLength"])
+    piSchedules["nextOnTime"] = nextOnTime
+    piSchedules["nextOffTime"] = nextOffTime
+    
+    return "";
 
 
 ##init_schedule         init_schedule           init_schedule           init_schedule           init_schedule           init_schedule           init_schedule
 def init_schedule(json_schedule):
     print('init_schedule \n')
-    print(json_schedule)
+    get_pretty_print(json_schedule)
     print('\n')
     print( type(json_schedule)  )
 
@@ -78,44 +150,36 @@ def init_schedule(json_schedule):
                     scheduleCount -= 1  # 1 less schedule
             else: #currently running or future
 
-                if (dateABeforeB(datetime.now(), piSchedules["scheduleStartDate"])):  #future start
+                if (dateABeforeB(datetime.now(), piSchedules["scheduleStartDate"])):  #future start date
                     piSchedules["nextOnTime"] = piSchedules["scheduleStartDate"]
                     piSchedules["nextOffTime"] = addTime(piSchedules["nextOnTime"], piSchedules["runLength"])
+
                 else: #Currently running
                     print('HAS SCHEDULE running' + str(piSchedules["scheduleId"]))
 
+                    calculate_next_on_time(piSchedules)
                     ##set to current start date of today or tomorrow and time
-                    scheduleStartDate = update_start_date(piSchedules["scheduleStartDate"], piSchedules["scheduleStopDate"])
+                    ##scheduleStartDate = update_start_date(piSchedules["scheduleStartDate"], piSchedules["scheduleStopDate"])
 
-                    if(timeABeforeB(toTime(scheduleStartDate), toTime(datetime.now()))) and \
-                        timeABeforeB(toTime(datetime.now()), toTime(piSchedules["scheduleStopDate"]) ):
 
-                        print('currently running!!!!!')
-                        timeMultiplier = (piSchedules["runEvery"] + piSchedules["runLength"]) / 1000    #calculate largest multiplier to get to next time
-                        secsDiff = (datetime.now() - toDateTime(scheduleStartDate)).total_seconds()
-                        diffCount = int(secsDiff/(timeMultiplier)) #Number of timeMultipliers to add, int to round down
-                        nextOnTime = addTime(scheduleStartDate, diffCount * (timeMultiplier), 'seconds')
-                        nextOnTime = addTime(nextOnTime, timeMultiplier, 'seconds') #add once more so past now
 
-                        nextOffTime = addTime(nextOnTime, piSchedules["runLength"])
-                        piSchedules["nextOnTime"] = nextOnTime
-                        piSchedules["nextOffTime"] = nextOffTime
-                    else:   #running, just notcurrently. Set to future start date
-                        print('Restart at a later date')
-                        nextOnTime = scheduleStartDate
-                        nextOffTime = addTime(nextOnTime, piSchedules["runLength"])
-                        print(nextOnTime)
 
-                        piSchedules["nextOnTime"] = nextOnTime
-                        piSchedules["nextOffTime"] = nextOffTime
+
+
+                  
 
                     print('schedule-' + str(piSchedules["scheduleId"]) + '  nexton-' + nextOnTime + ' nextoff-' + nextOffTime)
+
+
+
+
+
 
         if (scheduleCount == -1):  #delete port completely, no schedules left to run
             json_schedule.pop(portCount)
             portCount -= 1
 
-    print(json_schedule)
+    get_pretty_print(json_schedule)
 
     return json_schedule
 

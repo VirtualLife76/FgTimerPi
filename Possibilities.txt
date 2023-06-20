@@ -1,0 +1,3 @@
+Started - Ended.     -Done
+Started - Ongoing.	 -Currenet/active
+Not Started			 -Future
