@@ -25,9 +25,9 @@ def toTime(dt):
 ##dateABeforeB     dateABeforeB     dateABeforeB     dateABeforeB     dateABeforeB     dateABeforeB 
 def dateABeforeB(dtA, dtB):
     if (toDateTime(dtA) <= toDateTime(dtB)):
-        return 1
+        return True
     else:
-        return 0
+        return False
 
 ##Time
 def timeABeforeB(tA, tB):
@@ -78,40 +78,23 @@ def bring_date_current(dt):
 
 
 
-
-##Take Y-M-d & time convert to yesterdays y-m-d date & existing time day early in case 
-def datetime_to_current(dt):
-    
+#!!Asuming nothing is more than 1 day apart!!!
+##Take Y-M-d & time convert to yesterdays or todays y-m-d date. Depends if 
+def datetime_to_almost_current(dt):
     now = datetime.now()
     dt = toDateTime(dt)
     time = dt.time()
-    
 
-    temptime = str(time)
+    new_datetime = toDateTime(str(date.today()) + ' ' + str(time))
 
-    new_date_time = toDateTime(str(date.today()) + ' ' + str(time))
+    if(now > new_datetime):        #if date is past now, use yesterdays date time, start has passed already, but may still be running.
+        new_datetime = addTime(new_datetime, -1, 'days', '')
 
-    ##if date is past now, use yesterdays date time
-    if(now > new_date_time):
-
-        test = addTime(new_date_time, -1, 'days', '')
-
-        cd = str( date.today() - 1 ) + ' ' + str(dt)
-    else:
-        cd = str(date.today()) + ' ' + str(dt)
-    
-        
-
+    return new_datetime
 
 
     
-    
-
-    return cd
-
-
-    
-def bring_schedule_current(start_dt, interval):
+def bring_schedule_current(almost_current_date, runEvery, runLength):
 
     
 

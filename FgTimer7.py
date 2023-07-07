@@ -59,20 +59,26 @@ def update_start_date(scheduleStartDate, scheduleEndDate, runEvery, runLength):
 
     ##timeDiff = ms_diff(scheduleStartDate, datetime.now())      ##difference in MS and now
 
-    tempStartDate = datetime_to_current(scheduleStartDate)
+    almost_current_date = datetime_to_almost_current(scheduleStartDate)  ##Get either todays or yesterdays date based on if start date has passed already.
+    
+    bring_schedule_current = bring_schedule_current(almost_current_date, runEvery, runLength)
 
 
-    TIME_ELAPSED = datetime.now() - toDateTime(scheduleStartDate)
-    seconds_elapsed = TIME_ELAPSED.total_seconds() 
 
 
-    runFrequency = runEvery + runLength
 
-    msToCurrentTime = seconds_elapsed/runFrequency
 
-    newStartDateTime = addTime(scheduleStartDate, msToCurrentTime, "seconds")
+    #TIME_ELAPSED = datetime.now() - toDateTime(scheduleStartDate)
+    #seconds_elapsed = TIME_ELAPSED.total_seconds() 
 
-    print(newStartDateTime)
+
+    #runFrequency = runEvery + runLength
+
+    #msToCurrentTime = seconds_elapsed/runFrequency
+
+    #newStartDateTime = addTime(scheduleStartDate, msToCurrentTime, "seconds")
+
+    #print(newStartDateTime)
 
 
 
@@ -88,7 +94,7 @@ def update_start_date(scheduleStartDate, scheduleEndDate, runEvery, runLength):
 
 
 
-    currentDate = bring_date_current(scheduleStartDate)
+    #currentDate = bring_date_current(scheduleStartDate)
     
     
 
