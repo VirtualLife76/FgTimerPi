@@ -99,7 +99,7 @@ def bring_schedule_current(almost_current_date, runEvery, runLength):
     
 
 
-    current_dt = dt.time()
+    #current_dt = dt.time()
 
 
 

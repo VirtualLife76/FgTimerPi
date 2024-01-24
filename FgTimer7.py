@@ -61,11 +61,16 @@ def update_start_date(scheduleStartDate, scheduleEndDate, runEvery, runLength):
 
     almost_current_date = datetime_to_almost_current(scheduleStartDate)  ##Get either todays or yesterdays date based on if start date has passed already.
     
-    bring_schedule_current = bring_schedule_current(almost_current_date, runEvery, runLength)
+    bring_schedule_current(almost_current_date, runEvery, runLength)
 
 
 
-
+    
+    #if start-currentDatye is past and end time today is past add day
+    if(dateABeforeB(currentDate, datetime.now()) and dateABeforeB(endDate, datetime.now())): #add a day if this schedule is already past
+        currentDate = addTime(currentDate, 1, 'days')
+        c = currentDate
+    return currentDate
 
 
     #TIME_ELAPSED = datetime.now() - toDateTime(scheduleStartDate)
@@ -99,15 +104,10 @@ def update_start_date(scheduleStartDate, scheduleEndDate, runEvery, runLength):
     
 
 
-    #if start-currentDatye is past and end time today is past add day
-    if(dateABeforeB(currentDate, datetime.now()) and dateABeforeB(endDate, datetime.now())): #add a day if this schedule is already past
-        currentDate = addTime(currentDate, 1, 'days')
-        c = currentDate
-    return currentDate
 
 
 
-def calculate_next_on_time(piSchedules):
+def calculate_next_on_time(piSchedules):    ##Currently running and just booted, figure out next on time
     print('calculate_next_on_time \n' + str(piSchedules) + '\n')
 
     ##set to current start date of today or tomorrow and time
