@@ -48,8 +48,23 @@ def boostrap():
 ##calculate_next_on_time        calculate_next_on_time          calculate_next_on_time          calculate_next_on_time
 def calculate_next_on_time(piSchedules):    ##Currently running and just booted, figure out next on time
 
+    TIME_ELAPSED = datetime.now() - toDateTime(piSchedules["scheduleStartDate"])
+    seconds_elapsed = TIME_ELAPSED.total_seconds() 
+
+    runFrequency = piSchedules["runEvery"]  + piSchedules["runLength"]
+
+    msToCurrentTime = seconds_elapsed/runFrequency
+
+    newStartDateTime = addTime(scheduleStartDate, msToCurrentTime, "seconds")
 
 
+
+    #m = ms_diff(date1, date2)
+
+
+    t = addTime(date_time, seconds_elapsed)
+
+    a = t
 
 ##init_schedule         init_schedule           init_schedule           init_schedule           init_schedule  
 def init_schedule(json_schedule):
