@@ -4,6 +4,7 @@
 import json
 #import requests  #For Ajax calls
 import time
+import datetime
 from FgDateMethods import *
 
 total_num_ports = 24
@@ -47,15 +48,34 @@ def boostrap():
 
 ##calculate_next_on_time        calculate_next_on_time          calculate_next_on_time          calculate_next_on_time
 def calculate_next_on_time(piSchedules):    ##Currently running and just booted, figure out next on time
-
-    TIME_ELAPSED = datetime.now() - toDateTime(piSchedules["scheduleStartDate"])
-    seconds_elapsed = TIME_ELAPSED.total_seconds() 
-
     runFrequency = piSchedules["runEvery"]  + piSchedules["runLength"]
+    time_elapsed = datetime.now() - toDateTime(piSchedules["scheduleStartDate"])
+
+    time_elapsed_ms = time_elapsed.total_seconds() * 1000;
+
+    interval = time_elapsed_ms / runFrequency
+    
+
+
+
+    if time_elapsed.days > 0:
+        totalMs = 86400000 * time_elapsed.days
+
+
+        days_since = time_elapsed.days * 24 * 60 * 60
+        print(time_elapsed)
+        ttt = time_elapsed.total_seconds() * 1000
+        
+    if time_elapsed.weeks > 5:
+        print(time_elapsed)
+        
+    seconds_elapsed = time_elapsed.total_seconds() 
+
+    
 
     msToCurrentTime = seconds_elapsed/runFrequency
 
-    newStartDateTime = addTime(scheduleStartDate, msToCurrentTime, "seconds")
+    newStartDateTime = addTime(schedule_start_date, msToCurrentTime, "seconds")
 
 
 
