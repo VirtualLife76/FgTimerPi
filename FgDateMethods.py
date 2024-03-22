@@ -1,6 +1,6 @@
 from datetime import date, datetime, timedelta
 
-##TO DATE TIME     TO DATE TIME     TO DATE TIME     TO DATE TIME     TO DATE TIME     TO DATE TIME  
+##Convert possible string TO DATE TIME     TO DATE TIME     TO DATE TIME     TO DATE TIME     TO DATE TIME     TO DATE TIME  
 def toDateTime(time):
     time = str(time)
     if (time != ""):
