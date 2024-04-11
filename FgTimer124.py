@@ -66,7 +66,7 @@ def calculate_next_on_time(piSchedules):    ##Currently running and just booted,
         print(time_elapsed)
         ttt = time_elapsed.total_seconds() * 1000
         
-    if time_elapsed.weeks > 5:
+    if time_elapsed.weeks > 1:
         print(time_elapsed)
         
     seconds_elapsed = time_elapsed.total_seconds() 
