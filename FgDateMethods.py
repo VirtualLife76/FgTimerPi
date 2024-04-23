@@ -72,7 +72,10 @@ def ms_diff(date1, date2):
 def bring_date_current(dt):
     dt = toDateTime(dt)
     dt = dt.time()
-    cd = str(date.today()) + ' ' + str(dt)
+    ##If time is before today fix?
+    
+
+    cd = toDateTime(str(date.today()) + ' ' + str(dt))
 
     return cd
 
@@ -80,7 +83,7 @@ def bring_date_current(dt):
 
 #!!Asuming nothing is more than 1 day apart!!!
 ##Take Y-M-d & time convert to yesterdays or todays y-m-d date. Depends if 
-def datetime_to_almost_current(dt):
+def datetime_to_almost_current_old(dt):
     now = datetime.now()
     dt = toDateTime(dt)
     time = dt.time()
@@ -92,16 +95,3 @@ def datetime_to_almost_current(dt):
 
     return new_datetime
 
-
-    
-def bring_schedule_current(almost_current_date, runEvery, runLength):
-
-    
-
-
-    #current_dt = dt.time()
-
-
-
-    
-    return ""

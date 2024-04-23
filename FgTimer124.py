@@ -1,10 +1,12 @@
 # Flash grow timer 7.0 # 
 #import RPi.GPIO as GPIO
 
+from audioop import add
 import json
 #import requests  #For Ajax calls
 import time
 import datetime
+import math
 from FgDateMethods import *
 
 total_num_ports = 24
@@ -49,42 +51,25 @@ def boostrap():
 ##calculate_next_on_time        calculate_next_on_time          calculate_next_on_time          calculate_next_on_time
 def calculate_next_on_time(piSchedules):    ##Currently running and just booted, figure out next on time
     runFrequency = piSchedules["runEvery"]  + piSchedules["runLength"]
-    time_elapsed = datetime.now() - toDateTime(piSchedules["scheduleStartDate"])
+    
+    currentDate = bring_date_current(toDateTime(piSchedules["scheduleStartDate"]))
 
-    time_elapsed_ms = time_elapsed.total_seconds() * 1000;
+    time_elapsed = datetime.now() - currentDate
+
+    time_elapsed_ms = time_elapsed.total_seconds() * 1000
 
     interval = time_elapsed_ms / runFrequency
     
-
-
-
-    if time_elapsed.days > 0:
-        totalMs = 86400000 * time_elapsed.days
-
-
-        days_since = time_elapsed.days * 24 * 60 * 60
-        print(time_elapsed)
-        ttt = time_elapsed.total_seconds() * 1000
-        
-    if time_elapsed.weeks > 1:
-        print(time_elapsed)
-        
-    seconds_elapsed = time_elapsed.total_seconds() 
-
+    total = math.floor(interval) * runFrequency #Correct
+    
+    almost = addTime(currentDate, total)
+    
+    is_on = addTime(almost, piSchedules["runEvery"])
+    
     
 
-    msToCurrentTime = seconds_elapsed/runFrequency
-
-    newStartDateTime = addTime(schedule_start_date, msToCurrentTime, "seconds")
 
 
-
-    #m = ms_diff(date1, date2)
-
-
-    t = addTime(date_time, seconds_elapsed)
-
-    a = t
 
 ##init_schedule         init_schedule           init_schedule           init_schedule           init_schedule  
 def init_schedule(json_schedule):
