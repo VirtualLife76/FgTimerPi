@@ -50,7 +50,7 @@ def boostrap():
 
 ##calculate_next_on_time        calculate_next_on_time          calculate_next_on_time          calculate_next_on_time
 def calculate_next_on_time(piSchedules):    ##Currently running and just booted, figure out next on time
-    runFrequency = piSchedules["runEvery"]  + piSchedules["runLength"]
+    runFrequency = piSchedules["runEvery"]  + piSchedules["runLength"]  #on/off total time
     
     currentDate = bring_date_current(toDateTime(piSchedules["scheduleStartDate"]))
 
@@ -64,9 +64,17 @@ def calculate_next_on_time(piSchedules):    ##Currently running and just booted,
     
     almost = addTime(currentDate, total)
     
-    is_on = addTime(almost, piSchedules["runEvery"])
+    is_on = addTime(almost, piSchedules["runEvery"],"milliseconds", 'dt')
     
-    
+    if (is_on > datetime.now()):
+        print("next time to turn on:" + str(datetime.now()))
+        return datetime.now()
+    else:
+        print("nope")
+        is_on = addTime(is_on, piSchedules["runLength"],"milliseconds", 'dt')
+        print("next time to turn on x:" + str(is_on))
+        return is_on 
+        
 
 
 
