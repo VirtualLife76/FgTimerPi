@@ -69,15 +69,16 @@ def ms_diff(date1, date2):
     
 ##Take Y-M-d & time convert to todays y-m-d date & existing time
 ##Not truly accurate, could be up to 59 minutes off in case of power failure? Or startup?
-def bring_date_current(dt):
-    dt = toDateTime(dt)
-    dt = dt.time()
-    ##If time is before today fix?
-    
+def bring_date_current(dt_start, dt_stop):
+    start_time = toDateTime(dt_start)
+    start_time = start_time.time()  #get just the time
 
-    cd = toDateTime(str(date.today()) + ' ' + str(dt))
+    current_dt = toDateTime(str(date.today()) + ' ' + str(start_time))
 
-    return cd
+    if(current_dt > datetime.now()):
+        current_dt = current_dt - timedelta(days=1)
+
+    return current_dt
 
 
 
