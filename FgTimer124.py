@@ -53,8 +53,7 @@ def boostrap():
 def calculate_next_on_time(piSchedules):    ##Currently running and just booted, figure out next on time
     ##Keeping very separate for debugging purposes for now
     runFrequency = piSchedules["runEvery"]  + piSchedules["runLength"]  #on/off total time
-    
-
+ 
     currentDate = bring_date_current(toDateTime(piSchedules["scheduleStartDate"]), toDateTime(piSchedules["scheduleStopDate"]))
 
     time_elapsed = datetime.now() - currentDate
@@ -67,21 +66,30 @@ def calculate_next_on_time(piSchedules):    ##Currently running and just booted,
     
     almost = addTime(currentDate, total)
     
-    is_on = addTime(almost, piSchedules["runEvery"],"milliseconds", 'dt')
+    start_time = addTime(almost, piSchedules["runEvery"],"milliseconds", 'dt')
     
-    if (is_on > datetime.now()):    #Currently supposed to be running
-        print("next time to turn on:" + str(datetime.now()))
-        return datetime.now()
+    if (start_time > datetime.now()):    #Currently supposed to be running
+        piSchedules["nextOnTime"] = datetime.now()      #start immediately
+        piSchedules["nextOffTime"] = addTime(start_time, piSchedules["runLength"])      #set off time based on when it should have started
+        
+        print("next time to turn on:" + str(datetime.now()) + " off - " + piSchedules["nextOffTime"])
+        #return datetime.now()
     else:
         print("nope")   #Not currently running
-        is_on = addTime(is_on, piSchedules["runLength"],"milliseconds", 'dt')
-        print("next time to turn on x:" + str(is_on))
-        return is_on 
- 
+        start_time = addTime(start_time, piSchedules["runLength"],"milliseconds", 'dt')
+        
+        piSchedules["nextOnTime"] = start_time      #start time in future
+        piSchedules["nextOffTime"] = addTime(start_time, piSchedules["runLength"])      #set off time based on when it should have started
+        print("next on:" + str(datetime.now()) + " off - " + piSchedules["nextOffTime"])
+        #return start_time 
+        
+    print('end calculate_next_on_time')
+    print(piSchedules)
 
 ##init_schedule         init_schedule           init_schedule           init_schedule           init_schedule  
 def init_schedule(json_schedule):
     print('init_schedule \n')
+    print(json_schedule)
     get_pretty_print(json_schedule)
     print('\n')
 
@@ -108,9 +116,17 @@ def init_schedule(json_schedule):
                     piSchedules["nextOffTime"] = addTime(piSchedules["nextOnTime"], piSchedules["runLength"])
                 else: #Currently running
                     print('HAS SCHEDULE running' + str(piSchedules["scheduleId"]))
-                    next_on_time = calculate_next_on_time(piSchedules)
-                    piSchedules["nextOnTime"] = next_on_time
-                    piSchedules["nextOffTime"] = addTime(next_on_time, piSchedules["runLength"])
+                    calculate_next_on_time(piSchedules)     #Start start and end times
+
+                    print('next - ' + str(piSchedules["nextOnTime"]) + ' off ' + str(piSchedules["nextOffTime"]))
+                    # piSchedules["nextOnTime"] = next_on_time
+                    # piSchedules["nextOffTime"] = addTime(next_on_time, piSchedules["runLength"])
+                    
+
+    print('end init_schedule')
+    print(json_schedule)
+    print('/n')
+    
     return json_schedule
 
 
@@ -118,6 +134,8 @@ def init_schedule(json_schedule):
 
 ##Main loop. 
 def update_schedule(schedule):
+    print(schedule)
+
     deletePorts = []
     
     portCount = -1 

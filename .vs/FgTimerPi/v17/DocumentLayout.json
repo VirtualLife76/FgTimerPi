@@ -32,11 +32,11 @@
               "$type": "Document",
               "DocumentIndex": 2,
               "Title": "FgDateMethods.py",
-              "DocumentMoniker": "p:\\Code\\FlashGrow\\FgTimerPi\\FgDateMethods.py",
+              "DocumentMoniker": "P:\\Code\\FlashGrow\\FgTimerPi\\FgDateMethods.py",
               "RelativeDocumentMoniker": "FgDateMethods.py",
-              "ToolTip": "p:\\Code\\FlashGrow\\FgTimerPi\\FgDateMethods.py",
+              "ToolTip": "P:\\Code\\FlashGrow\\FgTimerPi\\FgDateMethods.py",
               "RelativeToolTip": "FgDateMethods.py",
-              "ViewState": "AQIAAE4AAAAAAAAAAAAAAE4AAAAAAAAA",
+              "ViewState": "AQIAAA8AAAAAAAAAAAAAABoAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
               "WhenOpened": "2024-05-05T13:42:15.171Z",
               "EditorCaption": ""
@@ -49,7 +49,7 @@
               "RelativeDocumentMoniker": "FgTimer124.py",
               "ToolTip": "P:\\Code\\FlashGrow\\FgTimerPi\\FgTimer124.py",
               "RelativeToolTip": "FgTimer124.py",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAAAAAA",
+              "ViewState": "AQIAAD8AAAAAAAAAAAAmwEEAAAA9AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
               "WhenOpened": "2024-02-18T21:47:49.988Z",
               "EditorCaption": ""
@@ -63,17 +63,51 @@
       "VerticalTabListWidth": 256,
       "FloatingWindowState": {
         "Id": "e47b1925-cbb9-4980-a3af-1af83499feaf",
-        "Display": 3,
-        "X": 440,
-        "Y": -380,
+        "Display": 1,
+        "X": 2,
+        "Y": 2,
         "Width": 1534,
         "Height": 822,
-        "WindowState": 0
+        "WindowState": 2
       },
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "FgTimer6.py",
+              "DocumentMoniker": "P:\\Code\\FlashGrow\\FgTimerPi\\FgTimer6.py",
+              "RelativeDocumentMoniker": "FgTimer6.py",
+              "ToolTip": "P:\\Code\\FlashGrow\\FgTimerPi\\FgTimer6.py",
+              "RelativeToolTip": "FgTimer6.py",
+              "ViewState": "AQIAAMwAAAAAAAAAAAAAANoAAAALAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
+              "WhenOpened": "2024-05-05T19:10:12.995Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "FloatingWindowState": {
+        "Id": "74153aad-5f5d-4a88-bee1-d90920effab9",
+        "Display": 2,
+        "X": -112,
+        "Y": 66,
+        "Width": 1238,
+        "Height": 662,
+        "WindowState": 2
+      },
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
@@ -83,22 +117,9 @@
               "RelativeDocumentMoniker": "FgSchedule.json",
               "ToolTip": "P:\\Code\\FlashGrow\\FgTimerPi\\FgSchedule.json",
               "RelativeToolTip": "FgSchedule.json",
-              "ViewState": "AQIAABUAAAAAAAAAAAAAACEAAAAVAAAA",
+              "ViewState": "AQIAABsAAAAAAAAAAAAAACUAAAAaAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2024-04-23T16:52:28.357Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "FgTimer6.py",
-              "DocumentMoniker": "P:\\Code\\FlashGrow\\FgTimerPi\\FgTimer6.py",
-              "RelativeDocumentMoniker": "FgTimer6.py",
-              "ToolTip": "P:\\Code\\FlashGrow\\FgTimerPi\\FgTimer6.py",
-              "RelativeToolTip": "FgTimer6.py",
-              "ViewState": "AQIAANUAAAAAAAAAAAAAANoAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
-              "WhenOpened": "2024-05-05T19:10:12.995Z",
               "EditorCaption": ""
             }
           ]
