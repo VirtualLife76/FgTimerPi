@@ -56,31 +56,38 @@ def calculate_next_on_time(piSchedules):    ##Currently running and just booted,
  
     currentDate = bring_date_current(toDateTime(piSchedules["scheduleStartDate"]), toDateTime(piSchedules["scheduleStopDate"]))
 
-    time_elapsed = datetime.now() - currentDate
+    time_elapsed = current_dt() - currentDate
 
     time_elapsed_ms = time_elapsed.total_seconds() * 1000
 
     interval = time_elapsed_ms / runFrequency   #how many times have on/off elapsed since start date/time and now
     
+
     total = math.floor(interval) * runFrequency #round down interval and get total time elapsed 
     
+    round_down = math.floor(interval * runFrequency)
+    
+
     almost = addTime(currentDate, total)
+    
+    diff = (current_dt() - toDateTime(almost))
     
     start_time = addTime(almost, piSchedules["runEvery"],"milliseconds", 'dt')
     
+
     if (start_time > datetime.now()):    #Currently supposed to be running
         piSchedules["nextOnTime"] = datetime.now()      #start immediately
         piSchedules["nextOffTime"] = addTime(start_time, piSchedules["runLength"])      #set off time based on when it should have started
         
-        print("next time to turn on:" + str(datetime.now()) + " off - " + piSchedules["nextOffTime"])
+        print("Should be on now :" + str(datetime.now()) + " off - " + piSchedules["nextOffTime"])
         #return datetime.now()
     else:
         print("nope")   #Not currently running
-        start_time = addTime(start_time, piSchedules["runLength"],"milliseconds", 'dt')
+        start_time = addTime(start_time, piSchedules["runLength"],"milliseconds", 'dt')  #Wrong
         
         piSchedules["nextOnTime"] = start_time      #start time in future
         piSchedules["nextOffTime"] = addTime(start_time, piSchedules["runLength"])      #set off time based on when it should have started
-        print("next on:" + str(datetime.now()) + " off - " + piSchedules["nextOffTime"])
+        print("next on:" + start_time + " off - " + str(piSchedules["nextOffTime"])) #THIS IS WRONG!!
         #return start_time 
         
     print('end calculate_next_on_time')
@@ -198,7 +205,7 @@ def update_schedule(schedule):
 
 ##################################################################################################
 ##Program run
-print('Start Timer')
+print('Start Timer' + str(datetime.now()))
 json_schedule = boostrap()
 
 is_running = True

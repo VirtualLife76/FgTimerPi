@@ -81,6 +81,18 @@ def bring_date_current(dt_start, dt_stop):
     return current_dt
 
 
+##Just for debugging so I can set the current Date/Time manually
+def current_dt():
+    debug = True
+    if(debug):
+        date = toDateOnly(datetime.now())
+        time = "16:00:00.00"
+        temp = toDateTime(date + ' ' + time)
+        return temp
+    else:
+        return datetime.now()
+
+
 
 #!!Asuming nothing is more than 1 day apart!!!
 ##Take Y-M-d & time convert to yesterdays or todays y-m-d date. Depends if 

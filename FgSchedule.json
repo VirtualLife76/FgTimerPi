@@ -33,7 +33,7 @@
         "scheduleId": 1154,
         "plantId": 0,
         "scheduleOrder": 1,
-        "scheduleStartDate": "2020-01-08 15:01:00",
+        "scheduleStartDate": "2024-06-19 15:01:00",
         "scheduleStopDate": "2034-04-08 14:50:00",
         "runEvery": 30000,
         "runLength": 30000,
