@@ -86,7 +86,7 @@ def current_dt():
     debug = True
     if(debug):
         date = toDateOnly(datetime.now())
-        time = "16:00:00.00"
+        time = "15:01:01.00"
         temp = toDateTime(date + ' ' + time)
         return temp
     else:

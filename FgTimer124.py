@@ -65,29 +65,66 @@ def calculate_next_on_time(piSchedules):    ##Currently running and just booted,
 
     total = math.floor(interval) * runFrequency #round down interval and get total time elapsed 
     
-    round_down = math.floor(interval * runFrequency)
+    #round_down = math.floor(interval * runFrequency)
     
 
     almost = addTime(currentDate, total)
     
-    diff = (current_dt() - toDateTime(almost))
+    ##diff = (current_dt() - toDateTime(almost))
     
-    start_time = addTime(almost, piSchedules["runEvery"],"milliseconds", 'dt')
+    ##start_time = addTime(almost, piSchedules["runEvery"],"milliseconds", 'dt')
+    
+    ##currently time should be short time away and off
+    startTimeFound = True
+    while (startTimeFound):
+        currentStartTime = almost
+        if (currentStartTime < current_dt()):
+            newStartTime = addTime(almost, piSchedules["runEvery"],"milliseconds", 'dt')
+            if(newStartTime > current_dt()): #currently running
+                #subract last for start time use new for end
+                print( str(currentStartTime) + " - " + str(newStartTime))
+                startTimeFound = False
+
+                #If next start time 
+                
+#Start time < now?  If there has been no end time since the start time
+  #loop find current time       
+                
+    start_today = bring_date_current(toDateTime(piSchedules["scheduleStartDate"]), current_dt())
+    end_today = bring_date_current(toDateTime(piSchedules["scheduleEndDate"]), current_dt())  #not right, shouldn't change end year?
+ 
+
+
+    timeABeforeB()
+
     
 
-    if (start_time > datetime.now()):    #Currently supposed to be running
-        piSchedules["nextOnTime"] = datetime.now()      #start immediately
+
+
+##
+
+#now is off, should always be off and before now?!
+                
+#If                 
+
+
+    print("Start Time: " + str(start_time) + " current dr: " + str(current_dt()))
+
+    if (start_time > current_dt()):    #Currently supposed to be running
+        piSchedules["nextOnTime"] = current_dt()      #start immediately
+        
         piSchedules["nextOffTime"] = addTime(start_time, piSchedules["runLength"])      #set off time based on when it should have started
         
-        print("Should be on now :" + str(datetime.now()) + " off - " + piSchedules["nextOffTime"])
+        print("Should be on now :" + str(piSchedules["nextOnTime"]) + " off - " + piSchedules["nextOffTime"])
         #return datetime.now()
     else:
         print("nope")   #Not currently running
+        
         start_time = addTime(start_time, piSchedules["runLength"],"milliseconds", 'dt')  #Wrong
         
         piSchedules["nextOnTime"] = start_time      #start time in future
         piSchedules["nextOffTime"] = addTime(start_time, piSchedules["runLength"])      #set off time based on when it should have started
-        print("next on:" + start_time + " off - " + str(piSchedules["nextOffTime"])) #THIS IS WRONG!!
+        print("next on:" + str(start_time) + " off - " + str(piSchedules["nextOffTime"])) #THIS IS WRONG!!
         #return start_time 
         
     print('end calculate_next_on_time')
@@ -141,8 +178,6 @@ def init_schedule(json_schedule):
 
 ##Main loop. 
 def update_schedule(schedule):
-    print(schedule)
-
     deletePorts = []
     
     portCount = -1 
