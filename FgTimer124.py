@@ -60,10 +60,6 @@ def calculate_next_on_time(piSchedules):    ##Currently running and just booted,
     print(next_time)
 
 
-
-
-
-
 #     ##Keeping very separate for debugging purposes for now
 #     runFrequency = piSchedules["runEvery"]  + piSchedules["runLength"]  #on/off total time
  
