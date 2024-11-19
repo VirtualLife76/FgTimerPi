@@ -55,7 +55,7 @@ def calculate_next_on_time(piSchedules):    ##Currently running and just booted,
 
 
     #schedule_action_milliseconds(StartTime,Duration,OffTimeInterval,CurrentTime):
-    toDateTime()
+
     next_time = schedule_action_milliseconds( toDateTime(piSchedules["scheduleStartDate"]), piSchedules["runEvery"], piSchedules["runLength"], current_dt()  )
     print(next_time)
 
@@ -175,7 +175,7 @@ def init_schedule(json_schedule):
                     print('HAS SCHEDULE running' + str(piSchedules["scheduleId"]))
                     calculate_next_on_time(piSchedules)     #Start start and end times
 
-                    print('next - ' + str(piSchedules["nextOnTime"]) + ' off ' + str(piSchedules["nextOffTime"]))
+                    #print('next - ' + str(piSchedules["nextOnTime"]) + ' off ' + str(piSchedules["nextOffTime"]))
                     # piSchedules["nextOnTime"] = next_on_time
                     # piSchedules["nextOffTime"] = addTime(next_on_time, piSchedules["runLength"])
                     
