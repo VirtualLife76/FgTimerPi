@@ -114,7 +114,7 @@ def schedule_action_milliseconds(StartTime,Duration,OffTimeInterval,CurrentTime)
         # else  take the current time, subtract the time_remainder and add the totalinterval
         TimeToNextAction =  CurrentTime - timedelta(milliseconds = time_remainder) + timedelta(milliseconds = totalinterval)
     
-    return (FgAction,TimeToNextAction) 
+    return (FgAction,toDateTime(TimeToNextAction)) 
 
 
 # run tests

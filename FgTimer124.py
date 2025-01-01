@@ -53,12 +53,12 @@ def boostrap():
 ##calculate_next_on_time        calculate_next_on_time          calculate_next_on_time          calculate_next_on_time
 def calculate_next_on_time(piSchedules):    ##Currently running and just booted, figure out next on time
 
-
     #schedule_action_milliseconds(StartTime,Duration,OffTimeInterval,CurrentTime):
 
     next_time = schedule_action_milliseconds( toDateTime(piSchedules["scheduleStartDate"]), piSchedules["runEvery"], piSchedules["runLength"], current_dt()  )
     print(next_time)
 
+    return next_time
 
 #     ##Keeping very separate for debugging purposes for now
 #     runFrequency = piSchedules["runEvery"]  + piSchedules["runLength"]  #on/off total time
@@ -169,7 +169,15 @@ def init_schedule(json_schedule):
                     piSchedules["nextOffTime"] = addTime(piSchedules["nextOnTime"], piSchedules["runLength"])
                 else: #Currently running
                     print('HAS SCHEDULE running' + str(piSchedules["scheduleId"]))
-                    calculate_next_on_time(piSchedules)     #Start start and end times
+                    nextOnOff = calculate_next_on_time(piSchedules)     #Start start and end times
+                    if(nextOnOff[0] == "On"):
+                        piSchedules["nextOnTime"] = nextOnOff[1]
+                        piSchedules["nextOffTime"] = addTime(piSchedules["nextOnTime"], piSchedules["runLength"])
+                    else:
+                        piSchedules["nextOnTime"] = current_dt();
+                        piSchedules["nextOffTime"] = nextOnOff[1]
+                        
+
 
                     #print('next - ' + str(piSchedules["nextOnTime"]) + ' off ' + str(piSchedules["nextOffTime"]))
                     # piSchedules["nextOnTime"] = next_on_time
