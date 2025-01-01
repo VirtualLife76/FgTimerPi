@@ -1,10 +1,15 @@
 # Flash grow timer 7.0 # 
 #import RPi.GPIO as GPIO
 
+#.from audioop import add
 import json
 #import requests  #For Ajax calls
 import time
+import datetime
+import keyboard
+import math
 from FgDateMethods import *
+from FgScheduleAction_v2 import *
 
 total_num_ports = 24
 data_pin=17
@@ -48,12 +53,12 @@ def boostrap():
 ##calculate_next_on_time        calculate_next_on_time          calculate_next_on_time          calculate_next_on_time
 def calculate_next_on_time(piSchedules):    ##Currently running and just booted, figure out next on time
 
-
     #schedule_action_milliseconds(StartTime,Duration,OffTimeInterval,CurrentTime):
 
     next_time = schedule_action_milliseconds( toDateTime(piSchedules["scheduleStartDate"]), piSchedules["runEvery"], piSchedules["runLength"], current_dt()  )
     print(next_time)
 
+    return next_time
 
 #     ##Keeping very separate for debugging purposes for now
 #     runFrequency = piSchedules["runEvery"]  + piSchedules["runLength"]  #on/off total time
@@ -137,6 +142,7 @@ def calculate_next_on_time(piSchedules):    ##Currently running and just booted,
 ##init_schedule         init_schedule           init_schedule           init_schedule           init_schedule  
 def init_schedule(json_schedule):
     print('init_schedule \n')
+    print(json_schedule)
     get_pretty_print(json_schedule)
     print('\n')
 
@@ -163,23 +169,107 @@ def init_schedule(json_schedule):
                     piSchedules["nextOffTime"] = addTime(piSchedules["nextOnTime"], piSchedules["runLength"])
                 else: #Currently running
                     print('HAS SCHEDULE running' + str(piSchedules["scheduleId"]))
+                    nextOnOff = calculate_next_on_time(piSchedules)     #Start start and end times
+                    if(nextOnOff[0] == "On"):
+                        piSchedules["nextOnTime"] = nextOnOff[1]
+                        piSchedules["nextOffTime"] = addTime(piSchedules["nextOnTime"], piSchedules["runLength"])
+                    else:
+                        piSchedules["nextOnTime"] = current_dt();
+                        piSchedules["nextOffTime"] = nextOnOff[1]
+                        
 
-                    piSchedules["nextOnTime"] = calculate_next_on_time(piSchedules)
-                    piSchedules["nextOffTime"] = addTime(piSchedules["nextOnTime"], piSchedules["runLength"])
-    return ""
+
+                    #print('next - ' + str(piSchedules["nextOnTime"]) + ' off ' + str(piSchedules["nextOffTime"]))
+                    # piSchedules["nextOnTime"] = next_on_time
+                    # piSchedules["nextOffTime"] = addTime(next_on_time, piSchedules["runLength"])
+                    
+
+    print('end init_schedule')
+    print(json_schedule)
+    print('/n')
+    
+    return json_schedule
 
 
 #endregion
 
+##Main loop. 
+def update_schedule(schedule):
+    deletePorts = []
+    
+    portCount = -1 
+    scheduleCount = -1
+
+    for ports in schedule[:]:
+        portCount += 1
+        scheduleCount = -1
+        currentPort = ports["portNumber"]
+        deleteSchedules = []
+        
+        for piSchedules in ports["piSchedules"][:]:    #a loop over a copy of the list referred as [:] 
+            #print(str(schedules["nextOnTime"]) + ' -- ' + str(datetime.now()) + '---' + str(schedules["nextOffTime"]) + '---' + str(currentPort )) 
+            #print(' -- ' + str(dateABeforeB(piSchedules["nextOffTime"],  datetime.now())) + ' --- ' + str(dateABeforeB(piSchedules["nextOnTime"], datetime.now())))
+            scheduleCount += 1
+
+            ##turn off
+            if(binary_array[currentPort] != 0 and dateABeforeB(piSchedules["nextOffTime"], datetime.now())):  
+                print(binary_array)
+                
+                binary_array[currentPort] = 0
+                
+                nextOnTime = addTime(piSchedules["nextOffTime"], piSchedules["runEvery"])
+                if (dateABeforeB(nextOnTime, piSchedules["scheduleStopDate"])):
+                    piSchedules["nextOnTime"] = nextOnTime  #off time set when turned on
+                else: #last run for this schedule delete it
+                    if(len(json_schedule[portCount]['piSchedules']) > 1):
+                        #ports.pop('piSchedules')  #remove this schedule
+                        ports["piSchedules"].pop(scheduleCount)
+                    else: #remove port, no schedules left.
+                        deletePorts.append(portCount)
+
+                print('Turn OFF-> ' + str(currentPort) + ' ' + str(datetime.now()) + ' on==> ' + str(piSchedules["nextOnTime"]) + ' off==>' + str(piSchedules["nextOffTime"]))
+            
+            ##turn on
+            if(binary_array[currentPort] != 1 and dateABeforeB(piSchedules["nextOnTime"], datetime.now()) ):  
+                print("On array" + str(binary_array))
+                print('Turn ON --> ' + str(currentPort) + ' -- ' + str(datetime.now()) + ' current next off==>' + str(piSchedules["nextOffTime"]))
+
+                binary_array[currentPort] = 1   ##set port on
+
+
+                test = addTime(piSchedules["nextOnTime"], piSchedules["runLength"])
+                piSchedules["nextOffTime"] = addTime(piSchedules["nextOnTime"], piSchedules["runLength"])
+
+                print(piSchedules["nextOffTime"] + " \n" + addTime(piSchedules["nextOnTime"], piSchedules["runLength"]))
+
+
+
+                if (dateABeforeB(piSchedules["scheduleStopDate"],piSchedules["nextOffTime"] )):  ##If the entire schedule end time is before next off time, set to end 
+                    print("End next off time")
+                    piSchedules["nextOffTime"] = piSchedules["scheduleStopDate"]
+
+                print('Turn ONN -> ' + str(currentPort) + ' -- ' + str(datetime.now()) + ' on==> ' + str(piSchedules["nextOnTime"]) + ' Next off==>' + str(piSchedules["nextOffTime"]) + ' ' + test)
+    if(len(deletePorts) > 0):
+        for p in deletePorts:
+            json_schedule.pop(p)
+            print("main loop delete ports ->" + json_schedule)
+
+
 ##################################################################################################
 ##Program run
-print('Start Timer')
+print('Start Timer' + str(datetime.now()))
 json_schedule = boostrap()
 
+is_running = True
 
-
-
-
+while True:
+    if keyboard.is_pressed("q"):
+        print("q pressed, pausing loop")
+        is_running = False
+    else:
+        is_running = True    
+        update_schedule(json_schedule)
+        
 
 
 
