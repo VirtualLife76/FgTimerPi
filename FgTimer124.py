@@ -57,87 +57,10 @@ def calculate_next_on_time(piSchedules):    ##Currently running and just booted,
 
     next_time = schedule_action_milliseconds( toDateTime(piSchedules["scheduleStartDate"]), piSchedules["runEvery"], piSchedules["runLength"], current_dt()  )
     print(next_time)
+    print("/n" + "End Calc next on time")
 
     return next_time
 
-#     ##Keeping very separate for debugging purposes for now
-#     runFrequency = piSchedules["runEvery"]  + piSchedules["runLength"]  #on/off total time
- 
-#     currentDate = bring_date_current(toDateTime(piSchedules["scheduleStartDate"]), toDateTime(piSchedules["scheduleStopDate"]))
-
-#     time_elapsed = current_dt() - currentDate
-
-#     time_elapsed_ms = time_elapsed.total_seconds() * 1000
-
-#     interval = time_elapsed_ms / runFrequency   #how many times have on/off elapsed since start date/time and now
-    
-
-#     total = math.floor(interval) * runFrequency #round down interval and get total time elapsed 
-    
-#     #round_down = math.floor(interval * runFrequency)
-    
-
-#     almost = addTime(currentDate, total)
-    
-#     ##diff = (current_dt() - toDateTime(almost))
-    
-#     ##start_time = addTime(almost, piSchedules["runEvery"],"milliseconds", 'dt')
-    
-#     ##currently time should be short time away and off
-#     startTimeFound = True
-#     while (startTimeFound):
-#         currentStartTime = almost
-#         if (currentStartTime < current_dt()):
-#             newStartTime = addTime(almost, piSchedules["runEvery"],"milliseconds", 'dt')
-#             if(newStartTime > current_dt()): #currently running
-#                 #subract last for start time use new for end
-#                 print( str(currentStartTime) + " - " + str(newStartTime))
-#                 startTimeFound = False
-
-#                 #If next start time 
-                
-# #Start time < now?  If there has been no end time since the start time
-#   #loop find current time       
-                
-#     start_today = bring_date_current(toDateTime(piSchedules["scheduleStartDate"]), current_dt())
-#     end_today = bring_date_current(toDateTime(piSchedules["scheduleEndDate"]), current_dt())  #not right, shouldn't change end year?
- 
-
-
-#     timeABeforeB()
-
-    
-
-
-
-# ##
-
-# #now is off, should always be off and before now?!
-                
-# #If                 
-
-
-#     print("Start Time: " + str(start_time) + " current dr: " + str(current_dt()))
-
-#     if (start_time > current_dt()):    #Currently supposed to be running
-#         piSchedules["nextOnTime"] = current_dt()      #start immediately
-        
-#         piSchedules["nextOffTime"] = addTime(start_time, piSchedules["runLength"])      #set off time based on when it should have started
-        
-#         print("Should be on now :" + str(piSchedules["nextOnTime"]) + " off - " + piSchedules["nextOffTime"])
-#         #return datetime.now()
-#     else:
-#         print("nope")   #Not currently running
-        
-#         start_time = addTime(start_time, piSchedules["runLength"],"milliseconds", 'dt')  #Wrong
-        
-#         piSchedules["nextOnTime"] = start_time      #start time in future
-#         piSchedules["nextOffTime"] = addTime(start_time, piSchedules["runLength"])      #set off time based on when it should have started
-#         print("next on:" + str(start_time) + " off - " + str(piSchedules["nextOffTime"])) #THIS IS WRONG!!
-#         #return start_time 
-        
-#     print('end calculate_next_on_time')
-#     print(piSchedules)
 
 ##init_schedule         init_schedule           init_schedule           init_schedule           init_schedule  
 def init_schedule(json_schedule):
@@ -228,12 +151,12 @@ def update_schedule(schedule):
                     else: #remove port, no schedules left.
                         deletePorts.append(portCount)
 
-                print('Turn OFF-> ' + str(currentPort) + ' ' + str(datetime.now()) + ' on==> ' + str(piSchedules["nextOnTime"]) + ' off==>' + str(piSchedules["nextOffTime"]))
+                print('Turn OFF Port-> ' + str(currentPort) + ' Now:' + str(datetime.now()) + ' Next on==> ' + str(piSchedules["nextOnTime"]) + ' Next off==>' + str(piSchedules["nextOffTime"]))
             
             ##turn on
             if(binary_array[currentPort] != 1 and dateABeforeB(piSchedules["nextOnTime"], datetime.now()) ):  
-                print("On array" + str(binary_array))
-                print('Turn ON --> ' + str(currentPort) + ' -- ' + str(datetime.now()) + ' current next off==>' + str(piSchedules["nextOffTime"]))
+                #print("On array" + str(binary_array))
+                #print('Turn ON --> ' + str(currentPort) + ' -- ' + str(datetime.now()) + ' current next off==>' + str(piSchedules["nextOffTime"]))
 
                 binary_array[currentPort] = 1   ##set port on
 
@@ -241,7 +164,7 @@ def update_schedule(schedule):
                 test = addTime(piSchedules["nextOnTime"], piSchedules["runLength"])
                 piSchedules["nextOffTime"] = addTime(piSchedules["nextOnTime"], piSchedules["runLength"])
 
-                print(piSchedules["nextOffTime"] + " \n" + addTime(piSchedules["nextOnTime"], piSchedules["runLength"]))
+                #print(piSchedules["nextOffTime"] + " \n" + addTime(piSchedules["nextOnTime"], piSchedules["runLength"]))
 
 
 
@@ -249,7 +172,7 @@ def update_schedule(schedule):
                     print("End next off time")
                     piSchedules["nextOffTime"] = piSchedules["scheduleStopDate"]
 
-                print('Turn ONN -> ' + str(currentPort) + ' -- ' + str(datetime.now()) + ' on==> ' + str(piSchedules["nextOnTime"]) + ' Next off==>' + str(piSchedules["nextOffTime"]) + ' ' + test)
+                print('Turn ONN -> ' + str(currentPort) + ' Now-- ' + str(datetime.now()) + ' on==> ' + str(piSchedules["nextOnTime"]) + ' Next off==>' + str(piSchedules["nextOffTime"]) + ' ' + test)
     if(len(deletePorts) > 0):
         for p in deletePorts:
             json_schedule.pop(p)
@@ -265,7 +188,9 @@ is_running = True
 
 while True:
     if keyboard.is_pressed("q"):
-        print("q pressed, pausing loop")
+        if(is_running):
+            print("q pressed, pausing loop")
+        
         is_running = False
     else:
         is_running = True    

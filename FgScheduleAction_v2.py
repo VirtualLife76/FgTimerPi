@@ -1,3 +1,5 @@
+from FgDateMethods import *
+
 # #notes from email
 # My basic challenge is, take a start time with an on/off frequency and pick a random time, should it be on or off and for how long?
 
@@ -114,7 +116,8 @@ def schedule_action_milliseconds(StartTime,Duration,OffTimeInterval,CurrentTime)
         # else  take the current time, subtract the time_remainder and add the totalinterval
         TimeToNextAction =  CurrentTime - timedelta(milliseconds = time_remainder) + timedelta(milliseconds = totalinterval)
     
-    return (FgAction,toDateTime(TimeToNextAction)) 
+    ret = toDateTime(TimeToNextAction)
+    return (FgAction,ret) 
 
 
 # run tests

@@ -1,22 +1,22 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "P:\\Code\\FlashGrow\\FgTimerPi\\",
+  "WorkspaceRootPath": "D:\\Code\\FgTimerPi\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|P:\\Code\\FlashGrow\\FgTimerPi\\FgTimer124.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\FgTimerPi\\FgTimer124.py||{8B382828-6202-11D1-8870-0000F87579D2}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:FgTimer124.py||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|P:\\Code\\FlashGrow\\FgTimerPi\\FgSchedule.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:FgSchedule.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|P:\\Code\\FlashGrow\\FgTimerPi\\FgScheduleAction_v2.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\FgTimerPi\\FgScheduleAction_v2.py||{8B382828-6202-11D1-8870-0000F87579D2}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:FgScheduleAction_v2.py||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|p:\\Code\\FlashGrow\\FgTimerPi\\FgDateMethods.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\FgTimerPi\\FgDateMethods.py||{8B382828-6202-11D1-8870-0000F87579D2}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:FgDateMethods.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\FgTimerPi\\FgSchedule.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:FgSchedule.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,56 +26,59 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "FgTimer124.py",
-              "DocumentMoniker": "P:\\Code\\FlashGrow\\FgTimerPi\\FgTimer124.py",
-              "RelativeDocumentMoniker": "FgTimer124.py",
-              "ToolTip": "P:\\Code\\FlashGrow\\FgTimerPi\\FgTimer124.py",
-              "RelativeToolTip": "FgTimer124.py",
-              "ViewState": "AgIAADEAAAAAAAAAAAAkwIsAAAAYAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
-              "WhenOpened": "2024-02-18T21:47:49.988Z",
+              "DocumentIndex": 3,
+              "Title": "FgSchedule.json",
+              "DocumentMoniker": "D:\\Code\\FgTimerPi\\FgSchedule.json",
+              "RelativeDocumentMoniker": "FgSchedule.json",
+              "ToolTip": "D:\\Code\\FgTimerPi\\FgSchedule.json",
+              "RelativeToolTip": "FgSchedule.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACEAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-12-28T21:41:49.244Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "FgDateMethods.py",
-              "DocumentMoniker": "P:\\Code\\FlashGrow\\FgTimerPi\\FgDateMethods.py",
-              "RelativeDocumentMoniker": "FgDateMethods.py",
-              "ToolTip": "P:\\Code\\FlashGrow\\FgTimerPi\\FgDateMethods.py",
-              "RelativeToolTip": "FgDateMethods.py",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAOAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "FgTimer124.py",
+              "DocumentMoniker": "D:\\Code\\FgTimerPi\\FgTimer124.py",
+              "RelativeDocumentMoniker": "FgTimer124.py",
+              "ToolTip": "D:\\Code\\FgTimerPi\\FgTimer124.py",
+              "RelativeToolTip": "FgTimer124.py",
+              "ViewState": "AgIAAIoAAAAAAAAAAADwv64AAAA/AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
-              "WhenOpened": "2024-05-05T13:42:15.171Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "FgScheduleAction_v2.py",
-              "DocumentMoniker": "P:\\Code\\FlashGrow\\FgTimerPi\\FgScheduleAction_v2.py",
-              "RelativeDocumentMoniker": "FgScheduleAction_v2.py",
-              "ToolTip": "P:\\Code\\FlashGrow\\FgTimerPi\\FgScheduleAction_v2.py",
-              "RelativeToolTip": "FgScheduleAction_v2.py",
-              "ViewState": "AgIAAMgAAAAAAAAAAAAAAHQAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
-              "WhenOpened": "2024-09-10T21:47:42.341Z"
+              "WhenOpened": "2024-12-28T21:41:49.503Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "FgSchedule.json",
-              "DocumentMoniker": "P:\\Code\\FlashGrow\\FgTimerPi\\FgSchedule.json",
-              "RelativeDocumentMoniker": "FgSchedule.json",
-              "ToolTip": "P:\\Code\\FlashGrow\\FgTimerPi\\FgSchedule.json",
-              "RelativeToolTip": "FgSchedule.json",
-              "ViewState": "AgIAAAQAAAAAAAAAAAAywCUAAAAaAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-04-23T16:52:28.357Z"
+              "Title": "FgScheduleAction_v2.py",
+              "DocumentMoniker": "D:\\Code\\FgTimerPi\\FgScheduleAction_v2.py",
+              "RelativeDocumentMoniker": "FgScheduleAction_v2.py",
+              "ToolTip": "D:\\Code\\FgTimerPi\\FgScheduleAction_v2.py",
+              "RelativeToolTip": "FgScheduleAction_v2.py",
+              "ViewState": "AgIAAG4AAAAAAAAAAAAAAHcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
+              "WhenOpened": "2024-12-28T21:41:49.45Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "FgDateMethods.py",
+              "DocumentMoniker": "D:\\Code\\FgTimerPi\\FgDateMethods.py",
+              "RelativeDocumentMoniker": "FgDateMethods.py",
+              "ToolTip": "D:\\Code\\FgTimerPi\\FgDateMethods.py",
+              "RelativeToolTip": "FgDateMethods.py",
+              "ViewState": "AgIAAE4AAAAAAAAAAAAAAFwAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
+              "WhenOpened": "2024-12-28T21:41:49.012Z",
+              "EditorCaption": ""
             }
           ]
         }
