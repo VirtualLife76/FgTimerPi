@@ -13,10 +13,10 @@
         "scheduleId": 1154006969,
         "plantId": 0,
         "scheduleOrder": 1,
-        "scheduleStartDate": "2024-01-01 15:00:00",
+        "scheduleStartDate": "2024-01-01 10:39:00",
         "scheduleStopDate": "2034-04-08 14:50:00",
-        "runEvery": 45000,
         "runLength": 15000,
+        "runEvery": 45000,
         "Notes": "Currently Running"
       }
     ]

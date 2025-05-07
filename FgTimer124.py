@@ -1,6 +1,8 @@
 # Flash grow timer 7.0 # 
 #import RPi.GPIO as GPIO
 
+#On 45 15 seconds, off 45 seconds already running issue
+
 #.from audioop import add
 from asyncio.windows_events import NULL
 import json
@@ -148,7 +150,7 @@ def update_schedule(schedule):
                     else: #remove port, no schedules left.
                         deletePorts.append(portCount)
 
-                print(str(datetime.now()) + 'Turn OFFFFFFFFFFFFFFFFF Port-> ' + str(currentPort) + ' Now:' + str(datetime.now()) + ' Next on==> ' + str(piSchedules["nextOnTime"]) + ' Next off==>' + str(piSchedules["nextOffTime"]))
+                print(str(datetime.now()) + ' Next on==> ' + str(piSchedules["nextOnTime"]) + ' Next off==>' + str(piSchedules["nextOffTime"]))
                 print('')
 
             ##turn on
@@ -173,7 +175,7 @@ def update_schedule(schedule):
                     print("End next off time!!!!!!!!!!!!!! SHPOULDN'T BE HERE NOW")
                     piSchedules["nextOffTime"] = piSchedules["scheduleStopDate"]
 
-                print(str(datetime.now()) + 'Turn ONN -> ' + str(currentPort) + ' Now-- ' + str(datetime.now()) + ' on==> ' + str(piSchedules["nextOnTime"]) + ' Next off==>' + str(piSchedules["nextOffTime"]) )
+                print(str(datetime.now()) + 'Turn ONN -> ' + str(piSchedules["nextOnTime"]) + ' Next off==>' + str(piSchedules["nextOffTime"]) )
     if(len(deletePorts) > 0):
         for p in deletePorts:
             json_schedule.pop(p)
