@@ -83,7 +83,7 @@ def bring_date_current(dt_start, dt_stop):
 
 ##Just for debugging so I can set the current Date/Time manually
 def current_dt():
-    debug = True
+    debug = False
     if(debug):
         date = toDateOnly(datetime.now())
         time = "15:01:01.00"

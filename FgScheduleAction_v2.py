@@ -72,11 +72,11 @@ def schedule_action_minutes(StartTime,Duration,OffTimeInterval,CurrentTime):
 
     #         
     if time_remainder < Duration :
-        FgAction = "On"
+        FgAction = "Off"     #TEST CHANGE ORIG ON
         # if < duration, take the current time, subtract the time_remainder and add the duration        
         TimeToNextAction =  CurrentTime - timedelta(minutes = time_remainder) + timedelta(minutes = Duration)
     else : 
-        FgAction = "Off"
+        FgAction = "On"
         # else  take the current time, subtract the time_remainder and add the totalinterval
         TimeToNextAction =  CurrentTime - timedelta(minutes = time_remainder) + timedelta(minutes = totalinterval)
     
@@ -108,15 +108,24 @@ def schedule_action_milliseconds(StartTime,Duration,OffTimeInterval,CurrentTime)
 
     #         
     if time_remainder < Duration :
-        FgAction = "On"
+        FgAction = "Off" #TEST CHANGE ORIG ON GD
         # if < duration, take the current time, subtract the time_remainder and add the duration        
         TimeToNextAction =  CurrentTime - timedelta(milliseconds = time_remainder) + timedelta(milliseconds = Duration)
     else : 
-        FgAction = "Off"
+        FgAction = "On"
         # else  take the current time, subtract the time_remainder and add the totalinterval
         TimeToNextAction =  CurrentTime - timedelta(milliseconds = time_remainder) + timedelta(milliseconds = totalinterval)
     
+
+
+
     ret = toDateTime(TimeToNextAction)
+
+    print('schedule_action_milliseconds' + '/n')
+    print(TimeToNextAction)
+    print(ret)
+    print(FgAction)
+
     return (FgAction,ret) 
 
 
